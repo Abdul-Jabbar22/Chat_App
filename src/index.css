@@ -16,9 +16,9 @@ body {
 }
 
 .container {
-  width: 90vw;
+  width: 100vw;
   /* Changed from 90vh to 90vw */
-  height: 90vh;
+  height: 100vh;
   /* Adjusted height if needed */
   background-color: rgba(17, 25, 40, 0.75);
   backdrop-filter: blur(19px) saturate(180%);

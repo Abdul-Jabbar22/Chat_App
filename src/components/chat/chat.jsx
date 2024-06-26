@@ -1,110 +1,123 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./chat.css";
 import EmojiPicker from "emoji-picker-react";
 
 const Chat = () => {
-  const [opne, setOpen] = useState(false);
+  const [open, setOpen] = useState(false); // Changed 'opne' to 'open'
   const [text, setText] = useState("");
+
+  const endRef = useRef(null);
+
+  useEffect(() => {
+    endRef.current.scrollIntoView({ behavior: "smooth" });
+  }, []);
 
   const handleEmoji = (e) => {
     setText((prev) => prev + e.emoji);
-
     setOpen(false);
   };
-  console.log(text);
+
   return (
     <div className="chat">
       <div className="top">
         <div className="user">
-          <img src="./avatar.png" alt="" />
+          <img src="./avatar.png" alt="User Avatar" />
           <div className="texts">
             <span>Abdul Jabbar</span>
-            <p>Loram ipsum , sit amet,</p>
+            <p>Lorem ipsum , sit amet,</p>
           </div>
         </div>
         <div className="icons">
-          <img src="./phone.png" alt="" />
-          <img src="./video.png" alt="" />
-          <img src="./info.png" alt="" />
+          <img src="./phone.png" alt="Phone Icon" />
+          <img src="./video.png" alt="Video Icon" />
+          <img src="./info.png" alt="Info Icon" />
         </div>
       </div>
       <div className="center">
         <div className="message">
-          <img src="./avatar.png" alt="" />
+          <img src="./avatar.png" alt="User Avatar" />
           <div className="text">
             <p>
-              Lorem ipsum, or lipsumas it is sometimes known, is dummy text used
-              in laying out print, graphic or web designs. The passage is
+              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+              used in laying out print, graphic or web designs. The passage is
               attributed to an unknown typesetter in the 15th century who is
-              thoug
+              thought to have scrambled parts of Cicero's De Finibus Bonorum et
+              Malorum for use in a type specimen book.
             </p>
-            <span> 1 minut ago</span>
-          </div>
-        </div>
-        <div className="message  own">
-          <div className="text">
-            <p>
-              Lorem ipsum, or lipsumas it is sometimes known, is dummy text used
-              in laying out print, graphic or web designs. The passage is
-              attributed to an unknown typesetter in the 15th century who is
-              thoug
-            </p>
-            <span> 1 minut ago</span>
-          </div>
-        </div>
-        <div className="message">
-          <img src="./avatar.png" alt="" />
-          <div className="text">
-            <p>
-              Lorem ipsum, or lipsumas it is sometimes known, is dummy text used
-              in laying out print, graphic or web designs. The passage is
-              attributed to an unknown typesetter in the 15th century who is
-              thoug
-            </p>
-            <span> 1 minut ago</span>
+            <span>1 minute ago</span>
           </div>
         </div>
         <div className="message own">
           <div className="text">
             <p>
-              Lorem ipsum, or lipsumas it is sometimes known, is dummy text used
-              in laying out print, graphic or web designs. The passage is
+              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+              used in laying out print, graphic or web designs. The passage is
               attributed to an unknown typesetter in the 15th century who is
-              thoug
+              thought to have scrambled parts of Cicero's De Finibus Bonorum et
+              Malorum for use in a type specimen book.
             </p>
-            <span> 1 minut ago</span>
+            <span>1 minute ago</span>
           </div>
         </div>
         <div className="message">
-          <img src="./avatar.png" alt="" />
+          <img src="./avatar.png" alt="User Avatar" />
           <div className="text">
             <p>
-              Lorem ipsum, or lipsumas it is sometimes known, is dummy text used
-              in laying out print, graphic or web designs. The passage is
+              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+              used in laying out print, graphic or web designs. The passage is
               attributed to an unknown typesetter in the 15th century who is
-              thoug
+              thought to have scrambled parts of Cicero's De Finibus Bonorum et
+              Malorum for use in a type specimen book.
             </p>
-            <span> 1 minut ago</span>
+            <span>1 minute ago</span>
           </div>
         </div>
         <div className="message own">
           <div className="text">
             <p>
-              Lorem ipsum, or lipsumas it is sometimes known, is dummy text used
-              in laying out print, graphic or web designs. The passage is
+              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+              used in laying out print, graphic or web designs. The passage is
               attributed to an unknown typesetter in the 15th century who is
-              thoug
+              thought to have scrambled parts of Cicero's De Finibus Bonorum et
+              Malorum for use in a type specimen book.
             </p>
-            <span> 1 minut ago</span>
+            <span>1 minute ago</span>
           </div>
         </div>
+        <div className="message">
+          <img src="./avatar.png" alt="User Avatar" />
+          <div className="text">
+            <p>
+              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+              used in laying out print, graphic or web designs. The passage is
+              attributed to an unknown typesetter in the 15th century who is
+              thought to have scrambled parts of Cicero's De Finibus Bonorum et
+              Malorum for use in a type specimen book.
+            </p>
+            <span>1 minute ago</span>
+          </div>
+        </div>
+        <div className="message own">
+          <div className="text">
+            <img src="./roof.jpg" alt="Roof Image" />
+            <p>
+              Lorem ipsum, or lipsum as it is sometimes known, is dummy text
+              used in laying out print, graphic or web designs. The passage is
+              attributed to an unknown typesetter in the 15th century who is
+              thought to have scrambled parts of Cicero's De Finibus Bonorum et
+              Malorum for use in a type specimen book.
+            </p>
+            <span>1 minute ago</span>
+          </div>
+        </div>
+        <div ref={endRef}></div>
       </div>
 
       <div className="bottom">
         <div className="icons">
-          <img src="./img.png" alt="" />
-          <img src="./camera.png" alt="" />
-          <img src="./mic.png" alt="" />
+          <img src="./img.png" alt="Image Icon" />
+          <img src="./camera.png" alt="Camera Icon" />
+          <img src="./mic.png" alt="Mic Icon" />
         </div>
         <input
           type="text"
@@ -116,11 +129,11 @@ const Chat = () => {
         <div className="emoji">
           <img
             src="./emoji.png"
-            alt=""
+            alt="Emoji Icon"
             onClick={() => setOpen((prev) => !prev)}
           />
           <div className="picker">
-            <EmojiPicker open={opne} onEmojiClick={handleEmoji} />
+            <EmojiPicker open={open} onEmojiClick={handleEmoji} />
           </div>
         </div>
         <button className="sendButton">Send</button>
