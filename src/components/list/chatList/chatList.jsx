@@ -9,27 +9,31 @@ const ChatList = () => {
   const [chats, setChats] = useState([]);
   const [addMode, setAddMode] = useState(false);
 
-  const { currentUser } = useUserStore();
+  const { currentUser } = useUserStore(); // Call useUserStore correctly
 
   useEffect(() => {
     const unSub = onSnapshot(
       doc(db, "userchats", currentUser.id),
-      async (res) => {
-        const items = res.data();
+      async (docSnapshot) => {
+        if (docSnapshot.exists()) {
+          const items = docSnapshot.data().chats || [];
 
-        const promises = items.map(async (item) => {
-          const userDocRef = doc(db, "users", item.receiverId);
-          const userDocSnap = await getDoc(userDocRef);
+          const promises = items.map(async (item) => {
+            const userDocRef = doc(db, "users", item.receiverId);
+            const userDocSnap = await getDoc(userDocRef);
 
-          const user = userDocRef.data();
+            return {
+              ...item,
+              user: userDocSnap.exists() ? userDocSnap.data() : null,
+            };
+          });
 
-          return { ...item, user };
-        });
-        const chatData = await Promise.all(promises);
-
-        setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
+          const chatData = await Promise.all(promises);
+          setChats(chatData.sort((a, b) => b.updatedAt - a.updatedAt));
+        }
       }
     );
+
     return () => {
       unSub();
     };
@@ -54,10 +58,10 @@ const ChatList = () => {
       </div>
       {chats.map((chat) => (
         <div className="item" key={chat.chatId}>
-          <img src="./avatar.png" alt="" />
+          <img src={chat.user?.avatar || "./avatar.png"} alt="" />
           <div className="texts">
-            <span>{chat.user?.username || "Unknown User"}</span>
-            <p>{chat.lastMessage || "No message"}</p>
+            <span>{chat.user?.username}</span>
+            <p>{chat.lastMessage}</p>
           </div>
         </div>
       ))}
